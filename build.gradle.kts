@@ -22,6 +22,9 @@ kotlin {
             webpackTask {
                 outputFileName = "main.js"
             }
+            runTask {
+                outputFileName = "main.js"
+            }
         }
     }
 }
