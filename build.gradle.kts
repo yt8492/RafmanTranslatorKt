@@ -28,3 +28,18 @@ kotlin {
         }
     }
 }
+
+tasks.register<Copy>("copyDistributions") {
+    val destinationDir = File("$rootDir/public")
+    if (!destinationDir.exists()) {
+        destinationDir.mkdir()
+    }
+    val resources = File("$rootDir/src/main/resources/").listFiles() ?: arrayOf()
+    val distributions = File("$buildDir/distributions/").listFiles() ?: arrayOf()
+    from(*resources, *distributions)
+    into(destinationDir)
+}
+
+if (project.hasProperty("browserWebpack")) {
+    tasks.getByName("browserWebpack").finalizedBy("copyDistributions")
+}
