@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js") version "1.3.61"
+    kotlin("js") version "1.3.70-eap-274"
 }
 
 group =  "com.yt8492"
@@ -10,6 +10,7 @@ repositories {
     mavenCentral()
     maven("http://dl.bintray.com/kotlin/kotlin-js-wrappers")
     maven("https://plugins.gradle.org/m2/")
+    maven("https://dl.bintray.com/kotlin/kotlin-eap")
 }
 
 dependencies {
@@ -29,7 +30,7 @@ kotlin {
     }
 }
 
-val browserWebpack = tasks.getByName("browserWebpack")
+val browserWebpack = tasks.getByName("browserProductionWebpack")
 
 val copyDistributions by tasks.registering {
     doLast {
