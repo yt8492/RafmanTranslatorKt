@@ -29,17 +29,21 @@ kotlin {
     }
 }
 
-val browserWebpackTask = tasks.getByName("browserWebpack")
+val browserWebpack = tasks.getByName("browserWebpack")
 
-browserWebpackTask.doLast {
-    copy {
-        val destinationDir = File("$rootDir/public")
-        if (!destinationDir.exists()) {
-            destinationDir.mkdir()
+val copyDistributions by tasks.registering {
+    doLast {
+        copy {
+            val destinationDir = File("$rootDir/public")
+            if (!destinationDir.exists()) {
+                destinationDir.mkdir()
+            }
+            val resources = File("$rootDir/src/main/resources/")
+            val distributions = File("$buildDir/distributions/")
+            from(resources, distributions)
+            into(destinationDir)
         }
-        val resources = File("$rootDir/src/main/resources/")
-        val distributions = File("$buildDir/distributions/")
-        from(resources, distributions)
-        into(destinationDir)
     }
 }
+
+browserWebpack.finalizedBy(copyDistributions)
