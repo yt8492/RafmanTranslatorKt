@@ -38,9 +38,8 @@ val copyDistributions by tasks.registering {
             if (!destinationDir.exists()) {
                 destinationDir.mkdir()
             }
-            val resources = File("$rootDir/src/main/resources/")
             val distributions = File("$buildDir/distributions/")
-            from(resources, distributions)
+            from(distributions)
             into(destinationDir)
         }
     }
