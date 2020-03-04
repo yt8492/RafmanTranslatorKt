@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js") version "1.3.70-eap-274"
+    kotlin("js") version "1.3.70"
 }
 
 group =  "com.yt8492"
@@ -10,7 +10,6 @@ repositories {
     mavenCentral()
     maven("http://dl.bintray.com/kotlin/kotlin-js-wrappers")
     maven("https://plugins.gradle.org/m2/")
-    maven("https://dl.bintray.com/kotlin/kotlin-eap")
 }
 
 dependencies {
