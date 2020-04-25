@@ -5,40 +5,39 @@ import react.dom.h2
 import react.dom.h3
 import react.dom.section
 
-class Translator : RComponent<Translator.Props, Translator.State>() {
-    init {
-        state.apply {
-            beforeTranslate = ""
+interface TranslatorProps : RProps {
+    var from: String
+    var to: String
+    var translateFunc: (String) -> String
+}
+
+val translator = functionalComponent<TranslatorProps> { props ->
+    val (beforeTranslate, setBeforeTranslateText) = useState("")
+    section(classes = "translator") {
+        h2 {
+            + "${props.from} -> ${props.to}"
         }
-    }
-
-    override fun RBuilder.render() {
-        section(classes = "translator") {
-            h2 {
-                + "${props.from} -> ${props.to}"
-            }
-            h3 {
-                + props.from
-            }
-            inputBox(state.beforeTranslate) {
-                setState {
-                    beforeTranslate = it
-                }
-            }
-            h3 {
-                + props.to
-            }
-            outputBox(props.translator(state.beforeTranslate))
+        h3 {
+            + props.from
         }
+        inputBox(beforeTranslate) {
+            setBeforeTranslateText(it)
+        }
+        h3 {
+            + props.to
+        }
+        outputBox(props.translateFunc(beforeTranslate))
     }
+}
 
-    interface Props : RProps {
-        var from: String
-        var to: String
-        var translator: (String) -> String
-    }
-
-    interface State : RState {
-        var beforeTranslate: String
+fun RBuilder.translator(
+    fromLanguageName: String,
+    toLanguageName: String,
+    translateFunc: (String) -> String
+) {
+    child(translator) {
+        attrs.from = fromLanguageName
+        attrs.to = toLanguageName
+        attrs.translateFunc = translateFunc
     }
 }
