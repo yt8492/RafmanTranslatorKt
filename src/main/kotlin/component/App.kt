@@ -13,19 +13,15 @@ fun RBuilder.app() {
         }
     }
     div(classes = "main") {
-        child(Translator::class) {
-            attrs {
-                from = "ラフム語"
-                to = "日本語"
-                translator = RafmanTranslator::translateRafmanToJapanese
-            }
-        }
-        child(Translator::class) {
-            attrs {
-                from = "日本語"
-                to = "ラフム語"
-                translator = RafmanTranslator::translateJapaneseToRafman
-            }
-        }
+        translator(
+            "ラフム語",
+            "日本語",
+            RafmanTranslator::translateRafmanToJapanese
+        )
+        translator(
+            "日本語",
+            "ラフム語",
+            RafmanTranslator::translateJapaneseToRafman
+        )
     }
 }
