@@ -1,11 +1,12 @@
 package component
 
 import react.RBuilder
-import react.dom.textArea
 import react.dom.value
+import styled.styledTextArea
 
 fun RBuilder.outputBox(value: String) {
-    textArea(classes = "outputBox") {
+    styledTextArea {
+        textBox()
         attrs.value = value
         attrs.readonly = true
         val lines = attrs.value.count { it == '\n' } + 1
