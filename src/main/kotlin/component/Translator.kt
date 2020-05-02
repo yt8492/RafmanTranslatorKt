@@ -1,9 +1,11 @@
 package component
 
+import kotlinx.css.*
 import react.*
 import react.dom.h2
 import react.dom.h3
-import react.dom.section
+import styled.css
+import styled.styledSection
 
 interface TranslatorProps : RProps {
     var from: String
@@ -13,7 +15,14 @@ interface TranslatorProps : RProps {
 
 val translator = functionalComponent<TranslatorProps> { props ->
     val (beforeTranslate, setBeforeTranslateText) = useState("")
-    section(classes = "translator") {
+    styledSection {
+        css {
+            backgroundColor = Color.whiteSmoke
+            width = 50.pct
+            height = 80.pct
+            margin = 30.px.toString()
+            padding = 20.px.toString()
+        }
         h2 {
             + "${props.from} -> ${props.to}"
         }
